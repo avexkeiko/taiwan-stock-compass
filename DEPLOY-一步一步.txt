@@ -1,0 +1,53 @@
+台股羅盤｜公開版部署
+
+你現在拿到的是「可以部署成公開網址」的完整專案。
+
+最簡單方式：
+GitHub → Cloudflare Pages → 產生 *.pages.dev 公開網址
+
+一、先建立 GitHub
+1. 到 GitHub 建立新 Repository。
+2. 名稱可以叫：
+   taiwan-stock-compass
+3. 建議設為 Private 也可以；Cloudflare 可以連接 repository。
+
+二、上傳本資料夾裡的所有檔案
+要保留：
+package.json
+vite.config.js
+index.html
+src/
+functions/
+_routes.json
+README.md
+
+三、Cloudflare
+進入 Cloudflare Dashboard
+→ Workers & Pages
+→ Create application
+→ Pages
+→ Connect to Git
+
+四、Build 設定
+Production branch：
+main
+
+Build command：
+npm run build
+
+Build output directory：
+dist
+
+五、Deploy
+完成後會得到：
+https://你的專案名稱.pages.dev
+
+這個網址就可以傳給朋友。
+
+六、以後更新
+修改 GitHub 裡的程式
+→ commit
+→ Cloudflare 自動重新部署。
+
+注意：
+Pages Functions 需要透過 Git 整合或 Wrangler 部署；不要把「含 functions 的專案」當成單純靜態檔直接拖曳上傳。
