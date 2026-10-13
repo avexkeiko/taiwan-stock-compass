@@ -62,7 +62,9 @@ function normalizeQuoteRows(payload) {
   })).filter(r => r.close !== null && r.date);
 }
 async function stockMonthTPEX(code, date) {
-  const dateCandidates = [monthDate(date), rocMonthDate(date)];
+  // TPEx tradingStock expects ROC date format (e.g. 115/10/01).
+  // Avoid the extra Gregorian-format request, which can exhaust Pages subrequest limits.
+  const dateCandidates = [rocMonthDate(date)];
   const urls = dateCandidates.map(d => `${TPEX}/www/zh-tw/afterTrading/tradingStock?code=${encodeURIComponent(code)}&date=${encodeURIComponent(d)}&id=&response=json`);
   let lastError;
   for (const url of urls) {
